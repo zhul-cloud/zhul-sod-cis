@@ -173,4 +173,4 @@
 
 [库存系列](https://www.woshipm.com/u/676582/page/2)
 
-[中央库存系统架构设计](
+[中央库存系统架构设计](http://www.weiot.net/article-365142-1.html)
