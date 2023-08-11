@@ -1,10 +1,12 @@
-# 一、背景介绍
+# Zhul【烛龙】中央库存系统
+
+## 一、背景介绍
 
 ### 1.1.中央库存系统是什么？
 
 > 中央库存系统(Center Inventory System，CIS)，是将自营库存、仓库库存、门店库存、商家库存等进行集中监控、管理和调度，并为外围系统提供统一库存服务的系统，它是位于仓储管理系统、门店系统、商家系统等之上，销售渠道平台之下的库存集中管理系统。
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=MmJkNzY3MTRiN2EwM2E2MDBlZjEwMmFlYWFhMDAyOTlfOWpHUUx2OWlwRUFJNlRFcXdWekN0THdrNEdGMHo5bHZfVG9rZW46UVhPTWJSMUNGbzdSQXR4VEZLRWMxa2tZbnpiXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/00-中央库存系统.jpg)
 
 ### 1.2.中央库存系统解决了什么？
 
@@ -28,15 +30,15 @@
 >
 > 核心思想：承上启下(向上实现共享，向下统一管理)
 
-# 二、设计原则
+## 二、设计原则
 
 ### 2.1.新零售三层库存模型
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGIwMTczNzk0MDk2Nzk4YTY1NDIzZmYxNTlhYjJkNjRfWEdnZ0dLdnpDODk3YlV5bTJCS0JDRktNdlV0V2JkeTBfVG9rZW46T3JKTGI1YjRKb3Eyckx4TFJwN2N0eUM5bjhmXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/01-新零售三层库存模型.jpg)
 
 ### 2.2.实物库存与销售库存
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=MTA3Mzc0NmNiMTMzNTVkZTlhY2YxNjc2NWJhMjI4ZjVfR0t0S3hSOHo0UXhYcE9HUzdQdkxWQmFMa1NiU0dnR2hfVG9rZW46TXdJM2J6cHlQb2RVclN4RkVlU2N4ZXN3blNjXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/02-实物库存与销售库存.jpg)
 
 ### 2.3.三层库存设计维度
 
@@ -70,19 +72,19 @@
 >
 > 可销售库存维度：根据实物库存重新计算可为销售平台提供的实物库存数量。
 
-# 三、设计思路
+## 三、设计思路
 
 ### 3.1.功能设计
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=YWYwNDk2MTgzZTgwNDI4ZWY3OWJmMmQ1YmVlMDU2MDFfUUhtSUtkQ2xCU1B6SU9YdGEzSkhsOWdTWVhONnhoOXJfVG9rZW46QmltUWI1Q1Bkb3F2STR4UjBvaWN0Z29BbmFiXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/03-功能设计.jpg)
 
 ### 3.2.分层设计
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2M0ZTBlNGY3YTBlZTU1ODFmNDVjZjM2MmQ3OTUyNWFfSFMwSWRiM2tTb2FvRDhoajd0TzRocWlWc3ZPc3V0M1FfVG9rZW46WGJLRGJWZzYzb2tWMmt4SElGSWNLaU1Jbk5oXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/04-分层设计.jpg)
 
 ### 3.3.模型设计
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=MTNmMTg2NWM1MTQ5NzI0YjM2ZDI4MzM1NmU0Y2VkMTRfRE95QnJlYmREeEp4dnRFVEl1MEpSZ05sUVZ0cFBVTHpfVG9rZW46UmxjRGJvZlgyb1dhN2l4ZlJrT2NmUDlobnRkXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/05-模型设计.jpg)
 
 | **实物库存属性说明**                                         |                                                              |                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------- |
@@ -112,21 +114,21 @@
 | 销售店铺              | 与多渠道多平台的售卖店铺保持一致，每个店铺按照比例分配一定库存           | 销售一店         |
 | 供货模式              | 供货模式分为两种：共享、独占                                       | 共享             |
 
-# 四、架构设计
+## 四、架构设计
 
 ### 4.1.业务架构
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=OGNlMDg1OGU4ZWFiMGVjNTQ3MDA2MDI2YzAyMWFiMzRfT1MwWmtEbEQzb1R6Y1plaUNsbmlKZ0gyZUo4RVpkMFVfVG9rZW46Ym94Y24zb29rVml4Umx5VXdQV1ZtTGhiMW9oXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/06-业务架构.png)
 
 ### 4.2.应用架构
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=MDExYzRlNGZhYThlZmY1NWY3NWU3YzVlZmZiYzQzMDFfTlJ1YWhtMlFNVTdTSGx4d3lCN2V0Q1h0Yzk3Wlp5YVdfVG9rZW46Ym94Y243THRTQ3dCRTZZR2dTR3huTDJubW1mXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/07-应用架构.png)
 
 ### 4.3.功能逻辑
 
 #### 4.3.1.调度层同步逻辑
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=MDIwZWIwOTU5MDIzMmUxODk1YjY3OGY3NTRmZmY4ZTlfUHVaZ0w2ZTE1ZjByUlVRMlJHTzlPQ2hyM2RURTlsMFhfVG9rZW46Ym94Y25KQkxpYlc0cTZkU0hBTW1RZEJqeTZjXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/08-调度层同步逻辑.png)
 
 #### 4.3.2.销售库存计算逻辑
 
@@ -134,19 +136,19 @@
 
 > 门店A、门店B为两个线下门店，门店A有100件iphone14，门店B有50件iphone14。  假设商家有1个天猫旗舰店，门店A、门店B均给天猫店供货。  天猫旗舰店仅支持快递发货方式，为了防止超卖，设置快递的最大分配比例为80%。  如图例所示，最终天猫渠道的iphone14的库存数量为120，并定期将数量同步到天猫平台。
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=YWY2N2FiZDUzY2U1ZmI4ZGQ2ZTBmZWI1ZjhjM2I1NzBfS1hrMFRwdkR5Q2pxY2JGWUNsUEc4WHR6MFMyTnI5SUtfVG9rZW46Ym94Y25rc3FsSEFoRDhLUnZBYUduNWNpZjljXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/09-多仓供货场景.png)
 
 ##### **单仓给多店供货场景**
 
 > 商家有1个电商仓，为商家的各个电商平台店铺提供仓储服务与发货服务，电商仓有100件iphone14。  电商仓同时为京东旗舰店、天猫旗舰店供货，两个店铺仅支持快递发货方式，最大分配比例分别为80%、60%。  如图例所示，最终京东渠道的iphone14的库存数量为80，天猫渠道的iphone14的库存数量为60。
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=NGUyNjhjNDg1YjI5YzVjMjQwYzc5NDBhMDc0NTQyNzNfVmNZYWE5UnUybTNGS1doa0EwMllVdU5NNEpsYnlHV2tfVG9rZW46Ym94Y25icVp2RWNPZHhyMU1VUlZ0TjlnUzRnXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/10-单仓给多店供货场景.png)
 
 ##### **门店全渠道库存共享场景**
 
 > 随着新零售线上线下渠道加速融合，门店线上线下全渠道销售，已经成为大部分零售商家的标配。  受益于微信生态和小程序电商的高速发展，越来越多的门店开启了云店模式，云店实际上就是门店的线上化交易渠道，或者称为门店的“线上货架”。  连锁企业把线下门店嫁接到微信生态中，将门店所有商品上架到云店小程序。借助云店，消费者无需到店，即可享受到门店的服务，同时，门店的导购可以向自己的会员推荐所有云店商品。  如图例所示，门店A有100份的草莓蛋糕，门店A为自己供货，并共享草莓蛋糕的库存到多个销售渠道（美团外卖、云店、门店线下渠道），实现门店“一盘货”全渠道销售。
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=M2RmMjZhODkwNDg0YjY3ZDRjZTgxNGZhNjcxMWM4OWNfeHdRcWtsbmxKZUx2MnQ5d3FieDZkSkswenhOWm9XRVlfVG9rZW46Ym94Y253MG1hZzNKWUUzWkFieE51UWlUQXJlXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/11-门店全渠道库存共享场景.png)
 
 #### 4.3.3.渠道库存同步
 
@@ -159,9 +161,9 @@
 
 > 组合商品一般指人为将几个单独售卖的商品组合在一起，进行合并售卖的商品，例如：下午茶套餐、七夕美妆组合等。  组合商品会先在调度层，根据组合比例计算好虚拟库存，不影响子商品的供货逻辑，下单时，会根据组合商品标识，进行子商品的实物库存预占、扣减。  如图所示，电商仓中，商品A有150件，商品B有200件，根据组合关系，可以算出组合商品C有100件。当下一单商品C时，会预占1件商品A+2件商品B的实物库存。
 
-![img](https://gwgd0j6ekm.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTE0YmIyMWU0MzJjYWM3ZjgxNTAwODYwNzlkYzBiZGVfa3Q5cDVRQVRveVA3emw0cmVFdTZSN3lPZXV4MHJvTW1fVG9rZW46Ym94Y25aS2xYV1FTMHgybDBiOFVpUmZER0NiXzE2OTE3MzI5NTE6MTY5MTczNjU1MV9WNA)
+![img](docs/images/12-组合商品计算逻辑.png)
 
-# 五、小结
+## 五、小结
 
 > 电商库存管理的核心在于要对库存数据进行分层设计：根据实际业务需要针对仓库层库存、实物层库存、销售层库存分别进行不同颗粒度的管理。但在基础库存数据模型建立起来以后，能对业务带来更多价值的，还是在于怎样进行供应链管理：如何用最小的成本(低库转)以最快的速度(库存在各仓的分布合理，不缺货)将用户需要的商品送到他手上。而这就是如何做采购计划和采购执行、如何做仓与仓之间的库存平衡等更为复杂的课题了。
 
