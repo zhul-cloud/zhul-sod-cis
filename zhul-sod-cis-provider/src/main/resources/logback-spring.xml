@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="LOG_HOME" source="logging.path"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+
+    <property name="ENCODER_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss}|${APP_NAME}|%-5level|[%thread]|%logger{50}|%msg%n"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 综合时间与大小的滚动策略，先按小时滚动，小时内的文件大于10mb时再按大小滚动 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/${APP_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.%i.zip</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${ENCODER_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+
+        <!-- SkywalkingTID输出 -->
+        <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %tid - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--异步文件写入-->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+    <logger name="com.zhul.cloud" level="INFO" />
+
+    <logger name="org.springframework" level="INFO" />
+
+    <logger name="org.mybatis" level="ERROR" />
+
+    <logger name="java.sql" level="ERROR" />
+
+    <logger name="io.shardingjdbc.core" level="ERROR" />
+</configuration>
